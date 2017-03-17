@@ -3,6 +3,12 @@ import scipy as sp
 
 def bruteFitness(jncs):
 
+<<<<<<< HEAD
+=======
+    #get number of children
+    numC = [jn.numChildren for jn in jncs]
+
+>>>>>>> AddBruteForceFitness
     #determine all possible combinations
 
     #loops through all possible combinates calculating fitness function
