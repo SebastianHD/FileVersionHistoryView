@@ -1,13 +1,15 @@
 #Define the junction locations recursively
 import scipy as sp
 
-def setLocations(jncs):
-    locs = [jn.getLocation() for jn in jncs]
-    #should optimize child order here
+def bruteFitness(jncs):
 
+    #determine all possible combinations
+
+    #loops through all possible combinates calculating fitness function
+    fit = longDist(jncs) + area(jncs)
 
 def longDist(jncs):
-    from scipy.spatial.distance import pdist, squareform
+    from scipy.spatial.distance import pdist
     #Determine the maximum (euclidian) distance between collection of pts
 
     #get pts
