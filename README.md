@@ -6,11 +6,13 @@ Requirements:
 This module makes use of the following modules: scipy, Levenshtein, glob, os, matplotlib, itertools
 
 Usage:
-import main from main
-main(dirName,fileSearchName)
+>>>import main from main
 
-# dirName is a string that contains the path to a particular folder on the directory.
-# fileSearchName is a string that contains a substring to search for in all of the files in the dirName path (excludes backup files denoted with ~)
+>>>main(dirName,fileSearchName)
+
+dirName is a string that contains the path to a particular folder on the directory. 
+
+fileSearchName is a string that contains a substring to search for in all of the files in the dirName path (excludes backup files denoted with ~)
 
 example:
 main('/home/sebastian/Documents/','test')
