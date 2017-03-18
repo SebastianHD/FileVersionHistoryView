@@ -42,7 +42,7 @@ class Junction(object):
             ch.needUpdate()
 
     def indOrder(self, chld):
-        #consider parent a link, so add one if not root
+        # consider parent a link, so add one if not root
         ind = [self.childOrder[ii] for ii, cc in enumerate(self.children)
             if cc == chld][0] + (not self.isRoot())
         return ind
@@ -74,9 +74,7 @@ class Junction(object):
 
     def getLocation(self):
         if not self.isUpdated:
-            print('%d: updating location from %d, %d' % (self.getIndex(), self.location[0], self.location[1]))
             self.setLocation()
-        print('%d: is up to date to %d, %d' % (self.getIndex(), self.location[0], self.location[1]))
         return self.location
 
     def getName(self):
@@ -96,20 +94,19 @@ class Junction(object):
         newParent.needUpdate()
 
     def _addChildren(self, child):
-        #internal helper function
-        #adds the associated children to the current junction
+        # internal helper function
+        # adds the associated children to the current junction
         try:
             self.children.update(child)
         except TypeError:
             self.children.add(child)
 
-        #since order will not be preseved in the set, might as well newly index
+        # since order wont be preseved in the set, might as well newly index
         self.childOrder = range(self.numChildren())
 
-
     def addChildren(self, childs):
-        #adds the associated children to the current junction
-        #expect childs to be list, but single elements will work also
+        # adds the associated children to the current junction
+        # expect childs to be list, but single elements will work also
         try:
             for ch in childs:
                 ch.updateParent(self)
@@ -117,41 +114,38 @@ class Junction(object):
             childs.updateParent(self)
 
     def _removeChildren(self, childs):
-        #removes the childs from the current junction
-        #expect childs to be list, but single elements will work also
+        # removes the childs from the current junction
+        # expect childs to be list, but single elements will work also
         try:
             for ll in childs:
                 self.children.remove(ll)
         except TypeError:
             self.children.remove(childs)
 
-        #since order will not be preseved in the set, might as well newly index
+        # since order wont be preseved in the set, might as well newly index
         self.childOrder = range(self.numChildren())
 
     def forkAbove(self, fork, childs=[]):
-        #fork between current and parent
-        #try:
-            fork.updateParent(self.parent)
-            self.updateParent(fork)
-            try:
-                for ch in childs:
-                    ch.updateParent(fork)
-            except TypeError:
+        # fork between current and parent
+        fork.updateParent(self.parent)
+        self.updateParent(fork)
+        try:
+            for ch in childs:
+                ch.updateParent(fork)
+        except TypeError:
                 childs.updateParent(fork)
-        #except:
-        #    pass
 
     def getChildren(self, ignoreChilds=None):
-        #return a list of all children not given in ignore list
-        #expect ignoreChilds to be list, but single elements will work also
+        # return a list of all children not given in ignore list
+        # expect ignoreChilds to be list, but single elements will work also
         try:
             return list(self.children.difference(set(ignoreChilds)))
         except TypeError:
             return list(self.children.difference(set([ignoreChilds])))
 
     def getLinked(self, ignoreJncs=[]):
-        #return a list of all juncs that are linked and not given in ignore list
-        #expect ignoreJncs to be list, but single elements will work also
+        # return a list of all juncs that are linked and not in ignore list
+        # expect ignoreJncs to be list, but single elements will work also
         tmp = self.getChildren(ignoreJncs)
         try:
             tmp.update([self.parent] if self.parent not in ignoreJncs else [])
@@ -162,7 +156,7 @@ class Junction(object):
 
 class Point(Junction):
     def __init__(self, ind, name=''):
-        #python 2 super(whos line are we searching, where are we in the line)
+        # python 2 super(whos line are we searching, where are we in the line)
         super(Point, self).__init__(ind)
         self.name = name
 

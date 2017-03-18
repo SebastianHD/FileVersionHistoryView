@@ -1,7 +1,8 @@
 from class_junction import Point
 
+
 def visualize(jncs):
-    #temporary copy paste from internet (not checked)
+    # temporary copy paste from internet (not checked)
     import numpy as np
     import pylab as pl
     import matplotlib.pyplot as plt
@@ -13,10 +14,9 @@ def visualize(jncs):
 
     fig, ax = pl.subplots()
     for jn in jncs:
-        print(jn.getIndex())
         if jn.parent:
             loc2 = jn.getLocation()
-            loc1 = jn.parent.location #for some reason this needs to be calculated after the other one, but this doesnt make sense
+            loc1 = jn.parent.location  # for some reason this needs to be calculated after the other one, but this doesnt make sense
             lines.append([loc1, loc2])
 
         if(isinstance(jn, Point)):
@@ -34,14 +34,11 @@ def visualize(jncs):
             xytext=tuple(map(sum, zip((-fs / 2, -fs / 2), offset))),
             fontsize=fs, textcoords='offset points')
 
-    print 'numLines', len(lines)
-    print lines
     lc = mc.LineCollection(lines, linewidths=2)
     ax.add_collection(lc)
     ax.legend(loc='upper left', fontsize=fs)
     ax.autoscale()
     ax.margins(0.1)
     plt.axis('equal')
-    plt.ion()
     plt.show()
 
