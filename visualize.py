@@ -15,9 +15,7 @@ def visualize(jncs):
     fig, ax = pl.subplots()
     for jn in jncs:
         if jn.parent:
-            loc2 = jn.getLocation()
-            loc1 = jn.parent.location  # for some reason this needs to be calculated after the other one, but this doesnt make sense
-            lines.append([loc1, loc2])
+            lines.append([jn.parent.getLocation(), jn.getLocation()])
 
         if(isinstance(jn, Point)):
             plt.scatter(jn.getLocation()[0], jn.getLocation()[1], marker='o',
@@ -26,13 +24,10 @@ def visualize(jncs):
             plt.scatter(jn.getLocation()[0], jn.getLocation()[1], color='red',
                 marker='o', s=fs ** 2 / 2, label='%d: fork' % jn.getIndex())
 
-        numTot = jn.numConnected()
-        strtAng = jn.orientation
-        th = strtAng + 2 * np.pi / numTot
-        offset = (fs * np.cos(th), fs * np.sin(th))
-        plt.annotate('%d' % (jn.getIndex()), xy=tuple(jn.getLocation()),
-            xytext=tuple(map(sum, zip((-fs / 2, -fs / 2), offset))),
-            fontsize=fs, textcoords='offset points')
+        plt.annotate('%d' % (jn.getIndex()),
+            xy=tuple(jn.getLocation()), xytext=tuple(jn.getLabelLocation(fs)),
+            fontsize=fs, textcoords='offset points',horizontalalignment='center',
+            verticalalignment='center')
 
     lc = mc.LineCollection(lines, linewidths=2)
     ax.add_collection(lc)
