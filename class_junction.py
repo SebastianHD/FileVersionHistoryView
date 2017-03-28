@@ -8,6 +8,7 @@ class Junction(object):
         self.children = set()
         self.childOrder = []
         self.location = [0, 0]
+        self.labelPos = 0
         self.orientation = 0
         self.isUpdated = False
         self.distance = 0  # distance to parent
@@ -43,7 +44,8 @@ class Junction(object):
 
     def indOrder(self, chld):
         # consider parent a link, so add one if not root
-        ind = [self.childOrder[ii] for ii, cc in enumerate(self.children)
+        ind = [
+            self.childOrder[ii] for ii, cc in enumerate(self.children)
             if cc == chld][0] + (not self.isRoot())
         return ind
 
@@ -76,6 +78,14 @@ class Junction(object):
         if not self.isUpdated:
             self.setLocation()
         return self.location
+
+    def setLabelPos(self, ind):
+        self.labelPos = ind
+
+    def getLabelLocation(self, r=12):
+        N = self.numConnected()
+        ang = np.pi*(2*self.labelPos + 1-np.mod(N, 2))/N + self.orientation
+        return r * np.array([np.cos(ang), np.sin(ang)])
 
     def getName(self):
         return self.name

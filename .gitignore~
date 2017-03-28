@@ -1,7 +1,8 @@
 *.pyc
+*.py~
 fileversion.nja
 Test.py
 Test2.py
-v01*/
-v02*/
-v03*/
+v*/
+v*/
+v*/

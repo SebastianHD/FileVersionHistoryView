@@ -81,7 +81,8 @@ def createLinks(jncs, diff):
 def spliceWhich(D):
     # return the index of best one to splice
     # D is a 2D array, each row composed of [d01[kk],d02[kk],d12[kk]]
-    x = sp.array([spliceLoc(D[kk, 0], D[kk, 1], D[kk, 2])[0]
+    x = sp.array([
+        spliceLoc(D[kk, 0], D[kk, 1], D[kk, 2])[0]
         for kk in range(len(D[:, 0]))])
 
     indBW = [kk for kk, xx in enumerate(x) if 0 < xx < D[kk, 0]]
@@ -101,7 +102,7 @@ def spliceLoc(d01, d02, d12):
     return (d0f, d1f, d2f)
 
 
-def appendLink(jncs,addPt,jnc1,d02,d12):
+def appendLink(jncs, addPt, jnc1, d02, d12):
     #
     #      |<--x-->|
     #      O=======F====1
@@ -135,7 +136,7 @@ def appendLink(jncs,addPt,jnc1,d02,d12):
         jnc1.setDist(d1f)
     else:
         # fork
-        from .class_junction import Fork
+        from class_junction import Fork
         newFork = Fork()
         jnc1.forkAbove(newFork, addPt)
         newFork.setDist(d0f)

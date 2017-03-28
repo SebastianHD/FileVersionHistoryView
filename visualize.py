@@ -3,12 +3,13 @@ from class_junction import Point
 
 def visualize(jncs):
     # temporary copy paste from internet (not checked)
-    import numpy as np
     import pylab as pl
     import matplotlib.pyplot as plt
     from matplotlib import collections as mc
 
     fs = 14
+    bbox_props = dict(
+        facecolor='none', edgecolor='black', boxstyle='round', pad=0.1)
 
     lines = list()
 
@@ -18,16 +19,19 @@ def visualize(jncs):
             lines.append([jn.parent.getLocation(), jn.getLocation()])
 
         if(isinstance(jn, Point)):
-            plt.scatter(jn.getLocation()[0], jn.getLocation()[1], marker='o',
+            plt.scatter(
+                jn.getLocation()[0], jn.getLocation()[1], marker='o',
                 s=fs ** 2 / 2, label='%d: %s' % (jn.getIndex(), jn.getName()))
         else:
-            plt.scatter(jn.getLocation()[0], jn.getLocation()[1], color='red',
+            plt.scatter(
+                jn.getLocation()[0], jn.getLocation()[1], color='red',
                 marker='o', s=fs ** 2 / 2, label='%d: fork' % jn.getIndex())
 
-        plt.annotate('%d' % (jn.getIndex()),
-            xy=tuple(jn.getLocation()), xytext=tuple(jn.getLabelLocation(fs)),
-            fontsize=fs, textcoords='offset points',horizontalalignment='center',
-            verticalalignment='center')
+        plt.annotate(
+            '%d' % (jn.getIndex()), xy=tuple(jn.getLocation()),
+            xytext=tuple(jn.getLabelLocation(fs)), fontsize=fs,
+            textcoords='offset points', horizontalalignment='center',
+            verticalalignment='center', bbox=bbox_props)
 
     lc = mc.LineCollection(lines, linewidths=2)
     ax.add_collection(lc)
