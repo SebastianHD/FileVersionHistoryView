@@ -15,7 +15,7 @@ dirName is a string that contains the path to a particular folder on the directo
 fileSearchName is a string that contains a substring to search for in all of the files in the dirName path (excludes backup files denoted with ~)
 
 example:
-main('/home/sebastian/Documents/','test')
-looks for all files that contain the substring 'test' in the path '/home/sebastian/Documents/' and process them.
+main('/home/','test')
+looks for all files that contain the substring 'test' in the path '/home/' and process them.
 
 Project is current under GNU General Public License v3.0.
